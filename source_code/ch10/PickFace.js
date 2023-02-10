@@ -10,7 +10,7 @@ var VSHADER_SOURCE =
   'void main() {\n' +
   '  gl_Position = u_MvpMatrix * a_Position;\n' +
   '  int face = int(a_Face);\n' + // Convert to int
-  '  vec3 color = (face == u_PickedFace) ? vec3(1.0) : a_Color.rgb;\n' +
+  '  vec3 color = (face == u_PickedFace) ? vec3(1.0,1.0,0.0) : a_Color.rgb;\n' +
   '  if(u_PickedFace == 0) {\n' + // In case of 0, insert the face number into alpha
   '    v_Color = vec4(color, a_Face/255.0);\n' +
   '  } else {\n' +
@@ -170,6 +170,7 @@ function checkFace(gl, n, x, y, currentAngle, u_PickedFace, viewProjMatrix, u_Mv
   // Read the pixel value of the clicked position. pixels[3] is the surface number
   gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
+  console.log("pixels[3] = " + pixels[3] + "")
   return pixels[3];
 }
 
